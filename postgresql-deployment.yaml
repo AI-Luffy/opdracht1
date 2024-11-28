@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postgresql
+  namespace: wikijs-exer  # Zorg ervoor dat je de juiste namespace opgeeft
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: postgresql
+  template:
+    metadata:
+      labels:
+        app: postgresql
+    spec:
+      containers:
+      - name: postgresql
+        image: postgres:13  # Gebruik de gewenste versie van PostgreSQL
+        env:
+        - name: POSTGRES_DB
+          value: wikijs
+        - name: POSTGRES_USER
+          value: wikijs_user  # Vul in met je database gebruiker
+        - name: POSTGRES_PASSWORD
+          value: your_db_password  # Vul in met je database wachtwoord
+        ports:
+        - containerPort: 5432
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgresql
+  namespace: wikijs-exer
+spec:
+  type: ClusterIP
+  ports:
+  - port: 5432
+    targetPort: 5432
+  selector:
+    app: postgresql
