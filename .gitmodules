@@ -1,3 +1,0 @@
-[submodule "argocd"]
-	path = argocd
-	url = https://github.com/AI-Luffy/argocd
