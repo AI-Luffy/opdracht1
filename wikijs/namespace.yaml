@@ -1,4 +1,0 @@
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: wikijs-exer  # Vervang dit door een gewenste naam voor je namespace
